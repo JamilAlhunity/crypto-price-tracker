@@ -1,0 +1,50 @@
+<div class="container-fluid mt-2">
+  <section class="row">
+    <div class="col-md-3 img">
+      <img [src]="coinData?.image?.large" />
+      <div class="more-details mt-2 text-center">
+        <p class="title">
+          Rank:
+          <span class="value">{{ coinData?.market_cap_rank }}</span>
+        </p>
+        <p class="title">
+          Current Price:
+          <span class="value">{{
+            coinData?.market_data.current_price.usd | currency: currency
+          }}</span>
+        </p>
+        <p class="title">
+          Market Cap:
+          <span class="value">{{
+            coinData?.market_data.market_cap.usd | currency: currency
+          }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-9 mt-3 about">
+      <h1 class="title">{{ coinData?.name }}:</h1>
+      <h4 [innerHtml]="coinData?.description?.en" class="more-detail"></h4>
+    </div>
+    <hr class="about">
+  </section>
+  <section class="row">
+    <div class="col-md-9">
+      <canvas
+        baseChart
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        [type]="lineChartType"
+      ></canvas>
+    </div>
+
+    <div
+      class="d-flex justify-content-around col-md-3"
+      [ngStyle]="{ height: '50px' }"
+    >
+      <button (click)="getGraphData(1)" class="btn btn-custom">24H</button>
+      <button (click)="getGraphData(30)" class="btn btn-custom">30D</button>
+      <button (click)="getGraphData(90)" class="btn btn-custom">3M</button>
+      <button (click)="getGraphData(365)" class="btn btn-custom">1Y</button>
+    </div>
+  </section>
+</div>
